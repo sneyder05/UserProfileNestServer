@@ -1,0 +1,21 @@
+version: '3'
+
+volumes:
+  mysql-db:
+
+services:
+  mysqlDb:
+    image: mysql:8.0
+    hostname: mysql-server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: G6GBrJjR6r778D4VXEvUPNGj
+      MYSQL_DATABASE: lucky
+      MYSQL_USER: lucky-admin
+      MYSQL_PASSWORD: 4bZuwNeMFLcAUDBuTB4mVgNM
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-db:/var/lib/mysql
+      - ./db/mysql/0.schema.sql:/docker-entrypoint-initdb.d/0.schema.sql
+      - ./db/mysql/1.seed.sql:/docker-entrypoint-initdb.d/1.seed.sql
