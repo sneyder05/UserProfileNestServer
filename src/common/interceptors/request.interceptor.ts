@@ -1,14 +1,11 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor, } from '@nestjs/common'
 import { Observable, } from 'rxjs'
 import { map, } from 'rxjs/operators'
-
-export interface IResponse<T> {
-  data: T
-}
+import { IRequestResponse, } from 'src/types/request'
 
 @Injectable()
-export class RequestTransformInterceptor<T> implements NestInterceptor<T, IResponse<T>> {
-  intercept(ctx: ExecutionContext, next: CallHandler): Observable<IResponse<T>> {
+export class RequestTransformInterceptor<T> implements NestInterceptor<T, IRequestResponse<T>> {
+  intercept(ctx: ExecutionContext, next: CallHandler): Observable<IRequestResponse<T>> {
     const httpResponse = ctx.switchToHttp().getResponse()
 
     return next

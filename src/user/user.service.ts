@@ -1,13 +1,18 @@
-import { Injectable, NotFoundException, } from '@nestjs/common'
+import { Injectable, InternalServerErrorException, NotFoundException, } from '@nestjs/common'
 import { ResultSetHeader, RowDataPacket, } from 'mysql2'
 import { InjectMysql, Mysql, } from 'mysql2-nestjs'
+import { AddressService, } from 'src/address/address.service'
+import { ProfileService, } from 'src/profile/profile.service'
 import { CreateUserDto, } from './types/create-user.dto'
 import { SignInUserDto, } from './types/signIn-user.dto'
 import { UserDto, } from './types/user.dto'
 
 @Injectable()
 export class UserService {
-  constructor(@InjectMysql() private readonly mysql: Mysql) {}
+  constructor(
+    @InjectMysql() private readonly mysql: Mysql, private readonly profileService: ProfileService,
+    private readonly addressService: AddressService
+  ) {}
 
   async signIn(signIn: SignInUserDto): Promise<UserDto> {
     const query = 'SELECT * FROM user WHERE username = ? AND password = ?'
@@ -27,10 +32,24 @@ export class UserService {
     const result = execInfo as ResultSetHeader
 
     if (result.affectedRows) {
+      // Create the address record
+      const addressId = await this.addressService.create({
+        cityId: user.cityId,
+        street: user.address,
+      })
+
+      // Create the profile record
+      await this.profileService.create({
+        userId: result.insertId,
+        addressId: addressId,
+        name: user.name,
+      })
+
+      // Return the user id
       return result.insertId
     }
 
-    return null
+    throw new InternalServerErrorException('Unable to save the user record')
   }
 
   async getById(id: number): Promise<UserDto> {
@@ -42,6 +61,6 @@ export class UserService {
       return result[0] as UserDto
     }
 
-    throw new NotFoundException(`Unable to find user with id '${id}'`)
+    throw new NotFoundException(`Unable to find an user with id '${id}'`)
   }
 }
