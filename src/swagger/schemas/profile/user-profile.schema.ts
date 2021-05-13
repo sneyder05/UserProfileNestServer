@@ -1,7 +1,7 @@
 import SwaggerRequestSchema from '../request.schema'
 import { StatusCodes, } from 'http-status-codes'
 
-const UserProfileSwaggerSchema = SwaggerRequestSchema.successs(StatusCodes.CREATED, {
+const UserProfileSwaggerSchema = SwaggerRequestSchema.successs(StatusCodes.OK, {
   id: 7,
   name: 'User\'s name',
   address: {

@@ -1,7 +1,7 @@
 import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform, } from '@nestjs/common'
 import { RowDataPacket, } from 'mysql2'
 import { InjectMysql, Mysql, } from 'mysql2-nestjs'
-import { GenericObject, } from 'src/types/generic'
+import { GenericObject, } from 'types/generic'
 
 @Injectable()
 export class ValidateCityPipe implements PipeTransform {

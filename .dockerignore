@@ -1,0 +1,9 @@
+node_modules
+dist
+db
+
+*.md
+*.yml
+*.editorconfig
+*.eslintrc
+*.gitignore

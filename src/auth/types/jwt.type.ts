@@ -1,4 +1,4 @@
-import { TokenType, } from 'src/util/constants.util'
+import { TokenType, } from 'util/constants.util'
 
 export type JwtPayload = {
   id: number,

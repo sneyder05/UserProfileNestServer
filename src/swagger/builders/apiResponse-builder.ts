@@ -1,5 +1,5 @@
 import { ApiResponseOptions, } from '@nestjs/swagger'
-import { GenericObject, } from 'src/types/generic'
+import { GenericObject, } from 'types/generic'
 
 const SwaggerLiteApiResponse = (httpCode: number, description: string, example?: GenericObject): ApiResponseOptions => {
   const schema: GenericObject = {}

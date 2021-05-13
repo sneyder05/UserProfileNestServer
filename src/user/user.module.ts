@@ -1,7 +1,7 @@
 import { forwardRef, Module, } from '@nestjs/common'
-import { AddressModule, } from 'src/address/address.module'
-import { AuthModule, } from 'src/auth/auth.module'
-import { ProfileModule, } from 'src/profile/profile.module'
+import { AddressModule, } from 'address/address.module'
+import { AuthModule, } from 'auth/auth.module'
+import { ProfileModule, } from 'profile/profile.module'
 import { UserController, } from './user.controller'
 import { UserService, } from './user.service'
 

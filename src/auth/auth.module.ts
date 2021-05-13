@@ -1,8 +1,8 @@
 import { forwardRef, Module, } from '@nestjs/common'
 import { JwtModule, } from '@nestjs/jwt'
-import { AppConfigModule, } from 'src/config/app/app.module'
-import { AppConfigService, } from 'src/config/app/app.service'
-import { UserModule, } from 'src/user/user.module'
+import { AppConfigModule, } from 'config/app/app.module'
+import { AppConfigService, } from 'config/app/app.service'
+import { UserModule, } from 'user/user.module'
 import { AuthService, } from './auth.service'
 import { JwtStrategy, } from './strategies/jwt.strategy'
 

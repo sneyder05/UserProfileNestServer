@@ -4,8 +4,24 @@ volumes:
   mysql-db:
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    environment:
+      APP_PORT_DOCKER: 3000
+    container_name: app
+    expose:
+      - 3000
+    ports:
+      - 4000:3000
+    depends_on:
+      - mysqlDb
+      - redis
   mysqlDb:
     image: mysql:8.0
+    container_name: mysqlDb
     hostname: mysql-server
     restart: always
     environment:
@@ -19,3 +35,10 @@ services:
       - mysql-db:/var/lib/mysql
       - ./db/mysql/0.schema.sql:/docker-entrypoint-initdb.d/0.schema.sql
       - ./db/mysql/1.seed.sql:/docker-entrypoint-initdb.d/1.seed.sql
+  redis:
+    image: redis:6.2-alpine
+    container_name: redisStore
+    hostname: redis-store
+    restart: always
+    ports:
+      - 6379:6379

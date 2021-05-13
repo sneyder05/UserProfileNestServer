@@ -1,5 +1,5 @@
-import { GenericObject, } from 'src/types/generic'
-import { IRequestResponse, } from 'src/types/request'
+import { GenericObject, } from 'types/generic'
+import { IRequestResponse, } from 'types/request'
 import { StatusCodes, } from 'http-status-codes'
 
 const SwaggerRequestSchema = {

@@ -1,7 +1,9 @@
 import { Injectable, } from '@nestjs/common'
 import { ConfigService, } from '@nestjs/config'
+import { AppSettingsConfig } from './types/appSettings.type'
 import { JwtConfig, } from './types/jwt.type'
 import { MySQLConfig, } from './types/mysql.type'
+import { RedisConfig, } from './types/redis.type'
 
 @Injectable()
 export class AppConfigService {
@@ -22,6 +24,20 @@ export class AppConfigService {
       password: this.configService.get<string>('app.mysql.password'),
       connectionLimit: this.configService.get<number>('app.mysql.connectionLimit'),
       database: this.configService.get<string>('app.mysql.database'),
+    }
+  }
+
+  get redis(): RedisConfig {
+    return {
+      host: this.configService.get<string>('app.redis.host'),
+      port: this.configService.get<number>('app.redis.port'),
+      ttl: this.configService.get<number>('app.redis.ttl'),
+    }
+  }
+
+  get app(): AppSettingsConfig {
+    return {
+      port: this.configService.get<number>('app.settings.port'),
     }
   }
 }
