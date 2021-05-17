@@ -1,4 +1,9 @@
 {
+  "testEnvironment": "node",
+  "roots": [ "<rootDir>/test" ],
+  "setupFiles": [
+    "<rootDir>/test/setup.ts"
+  ],
   "moduleFileExtensions": [
     "js",
     "json",
@@ -8,7 +13,6 @@
     "node_modules",
     "src"
   ],
-  "roots": [ "<rootDir>/test" ],
   "testRegex": ".*\\.spec\\.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
@@ -17,6 +21,5 @@
     "**/*.(t|j)s",
     "!src/swagger/**/*.ts"
   ],
-  "coverageDirectory": "<rootDir>/coverage/",
-  "testEnvironment": "node"
+  "coverageDirectory": "<rootDir>/coverage/"
 }
